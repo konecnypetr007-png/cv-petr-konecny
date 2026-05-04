@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Petr Konečný | Personal Website</title>
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --surface-soft: #eef2ff;
+      --text: #172033;
+      --muted: #657084;
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --border: #e3e8f2;
+      --shadow: 0 18px 45px rgba(20, 30, 55, 0.12);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background: radial-gradient(circle at top left, #dbeafe 0, transparent 32%), var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(244, 246, 251, 0.82);
+      border-bottom: 1px solid rgba(227, 232, 242, 0.8);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: 1.15rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 28px;
+      align-items: stretch;
+      padding: 58px 0 34px;
+    }
+
+    .hero-card, .contact-card, .section-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 42px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -70px;
+      bottom: -80px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.12);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    h1 {
+      margin: 22px 0 8px;
+      font-size: clamp(2.5rem, 6vw, 4.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+    }
+
+    .subtitle {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 1.2rem;
+      max-width: 680px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-weight: 750;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-secondary { background: white; border-color: var(--border); color: var(--text); }
+    .btn-secondary:hover { border-color: #bfdbfe; color: var(--primary-dark); transform: translateY(-1px); }
+
+    .contact-card {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .avatar {
+      width: 92px;
+      height: 92px;
+      border-radius: 28px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #2563eb, #0f172a);
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.28);
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .contact-list strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    section { padding: 18px 0; }
+
+    .section-title {
+      margin: 0 0 16px;
+      font-size: 1.7rem;
+      letter-spacing: -0.04em;
+    }
+
+    .section-card { padding: 30px; }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .item {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .item h3 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #334155;
+      font-weight: 650;
+      font-size: 0.92rem;
+    }
+
+    .language-box {
+      display: grid;
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .language-level {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .language-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .language-head strong {
+      font-size: 1rem;
+    }
+
+    .level-badge {
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 0.86rem;
+      min-width: 42px;
+      text-align: center;
+    }
+
+    .smart-slider {
+      position: relative;
+      height: 12px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+
+    .smart-slider span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #93c5fd, #2563eb, #1e40af);
+    }
+
+    .level-scale {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    .footer {
+      padding: 36px 0 50px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 820px) {
+      .hero, .grid-two { grid-template-columns: 1fr; }
+
+      .nav {
+        align-items: flex-start;
+        gap: 10px;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .hero-card, .contact-card, .section-card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="page nav" aria-label="Main navigation">
+      <a class="brand" href="#top">Petr Konečný</a>
+      <div class="nav-links">
+        <a href="#profile">Profile</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top" class="page">
+    <div class="hero">
+      <article class="hero-card">
+        <span class="tag">Industrial Management Student</span>
+        <h1>Petr Konečný</h1>
+        <p class="subtitle">
+          Technically oriented student with experience in the automotive industry, infotainment testing,
+          diagnostics, coding, integration and work with modern technical tools.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:xkonecny1@is.savs.cz">Contact by e-mail</a>
+          <a class="btn btn-secondary" href="#experience">View experience</a>
+        </div>
+      </article>
+
+      <aside id="contact" class="contact-card">
+        <div>
+          <div class="avatar">PK</div>
+          <h2>Contact</h2>
+        </div>
+        <div class="contact-list">
+          <div><strong>Address</strong>Strašnov 5, Krnsko</div>
+          <div><strong>Phone</strong><a href="tel:+420737781095">+420 737 781 095</a></div>
+          <div><strong>E-mail</strong><a href="mailto:xkonecny1@is.savs.cz">xkonecny1@is.savs.cz</a></div>
+        </div>
+      </aside>
+    </div>
+
+    <section id="profile">
+      <div class="section-card">
+        <h2 class="section-title">Profile</h2>
+        <p>
+          I am a university student of Industrial Management at Škoda Auto University. I have advanced knowledge
+          of most Microsoft Office programs and experience with diagnostic applications such as ODIS and iDex,
+          coding using CPTool, integration, and testing of test benches. My strengths include good communication
+          skills, technological proficiency, reliability, and a willingness to learn new things.
+        </p>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2 class="section-title">Work Experience</h2>
+      <div class="timeline">
+        <div class="item">
+          <h3>Entry Engineering s.r.o. — Test Engineer</h3>
+          <p>Testing, diagnostic work, integration and verification of test benches.</p>
+        </div>
+        <div class="item">
+          <h3>Škoda Auto a.s. — Logistics Warehouse Worker</h3>
+          <p>Summer job in the Škoda Plazy warehouse.</p>
+        </div>
+        <div class="item">
+          <h3>Škoda Auto a.s. — Engine Assembly</h3>
+          <p>Summer job in M2 engine assembly since the age of 16.</p>
+        </div>
+        <div class="item">
+          <h3>Škoda Auto a.s. — Mandatory Internships</h3>
+          <p>Internships during secondary education, operation of CNC and NC machines.</p>
+        </div>
+        <div class="item">
+          <h3>McDonald's — Restaurant Operations</h3>
+          <p>Team leadership, customer communication and order handling.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2 class="section-title">Education & Training</h2>
+      <div class="grid-two">
+        <div class="section-card">
+          <h3>Education</h3>
+          <div class="item">
+            <h3>ŠKODA AUTO University</h3>
+            <p>2022–present, Industrial Management program.</p>
+          </div>
+          <br>
+          <div class="item">
+            <h3>ŠKODA AUTO Secondary Technical School</h3>
+            <p>2017–2021, Mechanical Technician.</p>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h3>Training</h3>
+          <div class="skills">
+            <span class="chip">CNC and NC machines</span>
+            <span class="chip">3D printing</span>
+            <span class="chip">Robotics</span>
+            <span class="chip">ODIS</span>
+            <span class="chip">iDex</span>
+            <span class="chip">CPTool</span>
+            <span class="chip">Pneumatics</span>
+            <span class="chip">Electrical engineering</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-title">Skills, Languages & Licenses</h2>
+      <div class="grid-two">
+        <div class="section-card">
+          <h3>Skills</h3>
+          <div class="skills">
+            <span class="chip">Microsoft Office</span>
+            <span class="chip">Creo Parametric</span>
+            <span class="chip">SinuTrain</span>
+            <span class="chip">Heidenhain</span>
+            <span class="chip">ODIS</span>
+            <span class="chip">iDex</span>
+            <span class="chip">CPTool</span>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h3>Languages & Licenses</h3>
+
+          <div class="language-box">
+            <div class="language-level">
+              <div class="language-head">
+                <strong>English</strong>
+                <span class="level-badge">B2</span>
+              </div>
+              <div class="smart-slider" aria-label="English level B2">
+                <span style="width: 67%;"></span>
+              </div>
+              <div class="level-scale">
+                <span>A1</span>
+                <span>A2</span>
+                <span>B1</span>
+                <span>B2</span>
+                <span>C1</span>
+                <span>C2</span>
+              </div>
+            </div>
+
+            <div class="language-level">
+              <div class="language-head">
+                <strong>German</strong>
+                <span class="level-badge">A2</span>
+              </div>
+              <div class="smart-slider" aria-label="German level A2">
+                <span style="width: 34%;"></span>
+              </div>
+              <div class="level-scale">
+                <span>A1</span>
+                <span>A2</span>
+                <span>B1</span>
+                <span>B2</span>
+                <span>C1</span>
+                <span>C2</span>
+              </div>
+            </div>
+          </div>
+
+          <p style="margin-top: 18px;"><strong>Driving licenses:</strong> category B, category T</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="hobbies">
+      <div class="section-card">
+        <h2 class="section-title">Hobbies</h2>
+        <div class="skills">
+          <span class="chip">RC Rally</span>
+          <span class="chip">Skiing</span>
+          <span class="chip">Basketball</span>
+          <span class="chip">Foot tennis</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page footer">
+    © 2026 Petr Konečný. Personal website.
+  </footer>
+</body>
+</html>
